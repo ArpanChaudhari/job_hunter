@@ -15,6 +15,7 @@ venv.bak/
 
 # Personal Data
 resume.pdf
+job_description.txt
 
 # Streamlit
 .streamlit/
