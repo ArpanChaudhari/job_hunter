@@ -1,6 +1,6 @@
 import pdfplumber  # type: ignore # read pdf files
 import re  # regular expressions
-from sklearn.feature_extraction.text import CountVectorizer # type: ignore # convert text to numerical features   
+from sklearn.feature_extraction.text import CountVectorizer  # type: ignore # convert text to numerical features
 
 
 # function to extract text from pdf file
@@ -27,20 +27,31 @@ def clean_text(text):
 
     return text
 
+
 def extract_keywords(text):
+    if not text.strip():
+        return []  # Return empty if there is no text at all
 
-    vectorizer = CountVectorizer(stop_words = "english", ngram_range=(1, 2))  # consider unigrams and bigrams
+    try:
+        vectorizer = CountVectorizer(
+            stop_words="english", ngram_range=(1, 2)
+        )  # consider unigrams and bigrams
 
-    X = vectorizer.fit_transform([text])  # fit and transform the text
-    # fit_transform learn all unique words in the text and transform the text into numerical features (bag of words representation)
+        vectorizer.fit_transform([text])  # fit and transform the text
+        # fit_transform learn all unique words in the text and transform the text into numerical features (bag of words representation)
 
-    return vectorizer.get_feature_names_out() # return the extracted keywords as a list of strings
+        return vectorizer.get_feature_names_out() # return the extracted keywords as a list of strings
+    
+    except ValueError:
+        # If the vocabulary is completely empty after removing stop words, catch the error
+        return []
+
 
 # main function to test the code
 # __name == "__main__" is common python idiom to check if the script is being run directly or imported as a module
 if __name__ == "__main__":
 
-    pdf_path = "resume.pdf" # path to the pdf file
+    pdf_path = "resume.pdf"  # path to the pdf file
 
     # call the function to extract text from pdf
     extracted_text = extract_text_from_pdf(pdf_path)
