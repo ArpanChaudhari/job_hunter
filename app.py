@@ -38,7 +38,7 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 
 /* ── main content padding ── */
 [data-testid="stMain"] .block-container, [data-testid="stMainBlockContainer"] {
-    padding: 0 40px 40px 40px !important;
+    padding: 70px 40px 40px 40px !important;
     margin-top: 0 !important;
     max-width: 100% !important;
 }
@@ -47,16 +47,13 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 .navbar {
     background: linear-gradient(90deg, #0d1020 0%, #111527 100%);
     border-bottom: 1px solid rgba(139, 92, 246, 0.15);
-    margin-left: -40px;
-    margin-right: -40px;
+    position: fixed;
+    top: 0; left: 0; right: 0;
     padding: 14px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    z-index: 999;
     backdrop-filter: blur(12px);
 }
 .nav-logo {
@@ -457,18 +454,6 @@ with left:
         type=["pdf", "docx", "doc"],
         label_visibility="collapsed",
     )
-
-    if uploaded_file:
-        size_kb = round(uploaded_file.size / 1024, 1)
-        st.markdown(f"""
-        <div class="file-chip">
-          <div class="file-chip-icon"></div>
-          <div>
-            <div class="file-chip-name">{uploaded_file.name}</div>
-            <div class="file-chip-meta">✓ Uploaded &nbsp;·&nbsp; {size_kb} KB</div>
-          </div>
-        </div>
-        """, unsafe_allow_html=True)
 
     st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
 
