@@ -1,21 +1,32 @@
-import requests  # type: ignore
-import json
+import os
+import streamlit as st
+from groq import Groq
 from src.matcher import get_missing_skills
 from src.process_resume import clean_text , extract_text_from_pdf , extract_keywords
 
 
-def generate_cover_letter(prompt, model="llama3.2:3b"):
-    # hitting the local ollama API so my resume data stays private!
-    url = "http://localhost:11434/api/generate"
+def generate_cover_letter(prompt, model="llama-3.1-8b-instant"):
+    try:
+        api_key = st.secrets["GROQ_API_KEY"]
+    except Exception:
+        api_key = os.environ.get("GROQ_API_KEY")
+        
+    if not api_key or api_key == "your_groq_api_key_here":
+        return "⚠️ Error: GROQ_API_KEY is missing or invalid. Please add your API key to .streamlit/secrets.toml"
 
-    # This is the data we are sending to ollama
-    payload = {"model": model, "prompt": prompt, "stream": False}
+    client = Groq(api_key=api_key)
 
-    # We send the request and grab the response
-    response = requests.post(url, json=payload)
-    data = response.json()  # Convert the JSON text into Python dictionary
-
-    return data["response"]
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        model=model,
+    )
+    
+    return chat_completion.choices[0].message.content
 
 
 def create_prompt(resume_text, job_desc, missing_skills):

@@ -2,3 +2,4 @@ pdfplumber
 spacy
 scikit-learn
 streamlit
+groq
