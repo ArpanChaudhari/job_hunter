@@ -1,7 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer  # type: ignore # convert text to numerical features using TF-IDF
 from sklearn.metrics.pairwise import cosine_similarity  # type: ignore # compute cosine similarity between vectors
 
-from process_resume import (
+from src.process_resume import (
     extract_text_from_pdf,
     clean_text,
     extract_keywords,

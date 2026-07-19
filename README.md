@@ -1,6 +1,6 @@
 # JobHunter: AI-Powered Cover Letter Maker
 
-![JobHunter Banner](logo.png)
+![JobHunter Banner](images/logo.png)
 
 JobHunter is a premium, beautifully designed Streamlit application that generates highly personalized cover letters by analyzing your resume against a specific job description. It uses Machine Learning to score your resume and leverages local, privacy-preserving AI (via Ollama) to write the perfect cover letter.
 
@@ -55,7 +55,7 @@ streamlit run app.py
 ```
 
 ## Screenshots
-![App Interface](screenshot.png)
+![App Interface](images/screenshot.png)
 
 ## Contributing
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.

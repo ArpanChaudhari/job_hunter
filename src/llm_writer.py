@@ -1,7 +1,7 @@
 import requests  # type: ignore
 import json
-from matcher import get_missing_skills
-from process_resume import clean_text , extract_text_from_pdf , extract_keywords
+from src.matcher import get_missing_skills
+from src.process_resume import clean_text , extract_text_from_pdf , extract_keywords
 
 
 def generate_cover_letter(prompt, model="llama3.2:3b"):

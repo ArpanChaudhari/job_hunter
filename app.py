@@ -3,9 +3,9 @@ import time
 import random
 import os
 import base64
-from process_resume import extract_text_from_pdf, clean_text
-from matcher import calculate_match_score, get_missing_skills
-from llm_writer import create_prompt, generate_cover_letter
+from src.process_resume import extract_text_from_pdf, clean_text
+from src.matcher import calculate_match_score, get_missing_skills
+from src.llm_writer import create_prompt, generate_cover_letter
 
 def get_base64_image(image_path):
     if os.path.exists(image_path):
@@ -13,7 +13,7 @@ def get_base64_image(image_path):
             return base64.b64encode(f.read()).decode()
     return None
 
-icon = "logo.png" if os.path.exists("logo.png") else "🎯"
+icon = "images/logo.png" if os.path.exists("images/logo.png") else "🎯"
 st.set_page_config(
     page_title="JobHunter",
     page_icon=icon,
@@ -407,7 +407,7 @@ for k, v in [("generated", False), ("cover_letter", ""), ("score", 0), ("skills"
         st.session_state[k] = v
 
 # ── NAV ───────────────────────────────────────────────────────────────────────
-logo_b64 = get_base64_image("logo.png")
+logo_b64 = get_base64_image("images/logo.png")
 if logo_b64:
     logo_html = f'<img src="data:image/png;base64,{logo_b64}" style="height: 48px; border-radius: 8px; margin-right: 12px; object-fit: contain;">'
 else:
